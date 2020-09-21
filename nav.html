@@ -1,0 +1,96 @@
+<!--<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">-->
+<nav class="navbar navbar-expand-md bg-secondary navbar-dark  sticky-top">
+    <a class="navbar-brand" href="#">
+          <img src="http://placehold.it/200x50?text=Logo Geografía" alt="">
+        </a>
+        <!--<a class="navbar-brand" href="#">WebSiteName</a>-->
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb" aria-expanded="true">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div id="navb" class="navbar-collapse collapse hide">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Inicio</a>
+      </li>
+      <!--
+      <li class="nav-item">
+        <a class="nav-link" href="/tmptest">RecintosZ </a>
+      </li>
+      -->
+      <li class="nav-item">
+        <a class="nav-link" href="/asientos_list">Asientos Electorales</a>
+      </li>
+
+
+            <!-- PARA UNIDAD TERRITORIAL -->
+            {% if current_user.is_authenticated %}
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ord. Territorial
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="/mundo">Mundo</a>
+                    <a class="dropdown-item" href="/pais">Pais</a>
+                    <a class="dropdown-item" href="/deptos">Departamento</a>
+                    <a class="dropdown-item" href="/provincias">Provincia</a>
+                    <a class="dropdown-item" href="/seccion">Seccion</a>
+
+                    <a class="dropdown-item" href="/localidad">Localidad</a>
+                    <a class="dropdown-item" href="/circun">Circunscripcion</a>
+                </div>
+
+            </div>
+            {% endif %}
+
+      {% if current_user.is_authenticated and current_user.usuario =='admin' %}
+      <li class="nav-item">
+        <a class="nav-link" href="/m_usuarios">Usuarios</a>
+      </li>
+      {% endif %}
+      {% if current_user.is_authenticated %}
+      <!--Codigo Grover-Inicio-->
+      <li class="nav-item">
+        <a class="nav-link" href="/documentos_list">Documentos</a>
+      </li>
+      <!--Codigo Grover-Final-->
+      <li class="nav-item">
+        <a class="nav-link" href="/reportes">Reportes</a>
+      </li>            
+      {% endif %}
+    </ul>
+
+    <ul class="nav navbar-nav ml-auto">
+      {% if current_user.is_authenticated %}
+      <!--<li class="nav-item">-->
+          <!--<i><a class="nav-link" href="#">Usuario: {{ current_user.nombre }} {{ current_user.apellidos }} </a></i>-->
+          <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i>Usuario: {{ current_user.nombre }}  {{ current_user.apellidos }}</i>
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/change_pwd">Cambio de Password</a>
+                <a class="dropdown-item" href={{ url_for('registro', usuario_id=usrid) }} >Actualiza Usuario</a>
+            </div>
+        </div>
+        <!--</li> -->
+      {% endif %}
+  
+      <li class="nav-item">
+          <!--<a class="nav-link" href="registro"><span class="fas fa-user"></span> Registro</a>-->
+          <a class="nav-link" href={{ url_for('registro', usuario_id=0) }} ><span class="fas fa-user"></span>Registro</a>
+      </li>
+
+      {% if not current_user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="/login"><span class="fas fa-sign-in-alt"></span> Ingresar</a>
+      </li>
+      {% endif %}
+
+      {% if current_user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="/logout"><span class="fas fa-sign-in-alt"></span> Salir</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
